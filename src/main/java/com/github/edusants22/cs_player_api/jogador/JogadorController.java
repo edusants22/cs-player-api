@@ -1,27 +1,30 @@
-package com.github.edusants22.cs_player_api.controller;
+package com.github.edusants22.cs_player_api.jogador;
 
 
-import com.github.edusants22.cs_player_api.dto.CriarJogadorDTO;
-import com.github.edusants22.cs_player_api.dto.JogadorResumoDTO;
-import com.github.edusants22.cs_player_api.model.Jogador;
-import com.github.edusants22.cs_player_api.model.enums.Funcao;
-import com.github.edusants22.cs_player_api.model.enums.Pais;
-import com.github.edusants22.cs_player_api.model.enums.Time;
-import com.github.edusants22.cs_player_api.service.JogadorService;
+import com.github.edusants22.cs_player_api.jogador.dto.CriarJogadorDTO;
+import com.github.edusants22.cs_player_api.jogador.dto.JogadorResumoDTO;
+import com.github.edusants22.cs_player_api.jogador.models.Jogador;
+import com.github.edusants22.cs_player_api.jogador.enums.Funcao;
+import com.github.edusants22.cs_player_api.jogador.enums.Pais;
+import com.github.edusants22.cs_player_api.time.TimeRepository;
+import com.github.edusants22.cs_player_api.time.models.Time;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = ("http://localhost:4200"))
 @RestController
 @RequestMapping("/jogadores")
 public class JogadorController {
 
     private final JogadorService jogadorService;
+    private final TimeRepository timeRepository;
 
-    public JogadorController(JogadorService jogadorService){
+    public JogadorController(JogadorService jogadorService, TimeRepository timeRepository){
         this.jogadorService = jogadorService;
+        this.timeRepository = timeRepository;
     }
 
     @GetMapping("/todos")
@@ -44,17 +47,16 @@ public class JogadorController {
     @GetMapping("/listaJogadores")
     public List <Jogador> listaJogadores(
             @RequestParam(required = false) Pais pais,
-            @RequestParam(required = false) Time time,
+            @RequestParam(required = false) Long timeId,
             @RequestParam(required = false) Funcao funcao) {
-                return jogadorService.listaJogadores(time, pais, funcao);
+                return jogadorService.listaJogadores(timeId, pais, funcao);
     }
 
     @GetMapping("/listaJogadoresRating")
     public List <Jogador> listaJogadoresRating(
             @RequestParam(required = false) Pais pais,
-            @RequestParam(required = false) Time time,
-            @RequestParam(required = false) Double rating ){
-                return jogadorService.listaJogadoresRating(pais, time, rating);
+            @RequestParam(required = false) Long timeId){
+                return jogadorService.listaJogadoresRating(pais, timeId);
     }
 
     @GetMapping("/listaResumoJogadores")
@@ -62,7 +64,7 @@ public class JogadorController {
         return jogadorService.listaResumoJogadores();
     }
 
-    @PostMapping
+    @PostMapping("/criarJogador")
     public Jogador criarJogador(@RequestBody CriarJogadorDTO dto){
         return jogadorService.criarJogador(dto);
     }

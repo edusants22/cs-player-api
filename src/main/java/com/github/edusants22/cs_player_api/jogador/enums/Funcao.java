@@ -1,4 +1,4 @@
-package com.github.edusants22.cs_player_api.model.enums;
+package com.github.edusants22.cs_player_api.jogador.enums;
 
 public enum Funcao {
 
