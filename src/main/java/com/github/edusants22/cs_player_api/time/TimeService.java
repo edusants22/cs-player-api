@@ -26,6 +26,10 @@ public class TimeService {
     // Hoje nossa base é uma ArrayList.
     public Time criarTime(CriarTimeDTO criarTimeDTO) {
 
+        if (timeRepository.existsByNomeIgnoreCase(criarTimeDTO.getNome().trim())) {
+            throw new RuntimeException("Já existe um time com esse nome.");
+        }
+
         Time time = new Time();
 
         time.setNome(criarTimeDTO.getNome());
