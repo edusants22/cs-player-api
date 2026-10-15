@@ -35,4 +35,8 @@ public class TimeService {
         time.setNome(criarTimeDTO.getNome());
         return timeRepository.save(time);
     }
+
+    public void excluirTime(Long id) {
+        timeRepository.deleteById(id);
+    }
 }

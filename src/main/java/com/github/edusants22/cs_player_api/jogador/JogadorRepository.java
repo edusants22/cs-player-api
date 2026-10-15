@@ -30,4 +30,8 @@ public interface JogadorRepository extends JpaRepository<Jogador, Long> {
 
     List<Jogador> findByPaisAndTimeOrderByRatingDesc(Pais pais, Time time);
 
+    boolean existsByNicknameIgnoreCase(String nickname);
+
+    boolean existsByNomeCompletoIgnoreCase(String nomeCompleto);
+
 }

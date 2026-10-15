@@ -31,4 +31,9 @@ public class TimeController {
     public Time CriarTime (@RequestBody CriarTimeDTO dto){
         return timeService.criarTime(dto);
     }
+
+    @DeleteMapping("/{id}")
+    public void excluirTime(@PathVariable Long id){
+        timeService.excluirTime(id);
+    }
 }

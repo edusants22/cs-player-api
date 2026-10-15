@@ -74,6 +74,14 @@ public class JogadorService {
     // No futuro será um banco de dados.
     public Jogador criarJogador(CriarJogadorDTO dto) {
 
+        if (jogadorRepository.existsByNicknameIgnoreCase(dto.getNickname().trim())){
+            throw new RuntimeException("Ja existe um jogador com esse nome no cadastrado");
+        }
+
+        if (jogadorRepository.existsByNomeCompletoIgnoreCase(dto.getNomeCompleto().trim())){
+            throw new RuntimeException("Ja existe um jogador com esse nome");
+        }
+
         Jogador jogador = new Jogador();
 
         jogador.setNickname(dto.getNickname());
