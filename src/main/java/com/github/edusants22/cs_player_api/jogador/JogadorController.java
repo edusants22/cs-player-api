@@ -68,4 +68,7 @@ public class JogadorController {
     public Jogador criarJogador(@RequestBody CriarJogadorDTO dto){
         return jogadorService.criarJogador(dto);
     }
+
+    @DeleteMapping("/{id}")
+    public void deletarJogador(@PathVariable Long id){ jogadorService.excluirJogador(id);}
 }

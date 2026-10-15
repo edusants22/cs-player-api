@@ -104,4 +104,8 @@ public class JogadorService {
         return timeRepository.findById(timeId)
                 .orElse(null);
     }
+
+    public void excluirJogador(Long id) {
+        jogadorRepository.deleteById(id);
+    }
 }
