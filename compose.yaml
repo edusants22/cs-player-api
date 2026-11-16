@@ -82,7 +82,7 @@ services:
       retries: 20
       start_period: 30s
   frontend:
-    build: ../cs-player-front
+    build: ../../cs-player-front
     environment:
       API_URL: ${API_PUBLIC_URL:-http://localhost:8081/api}
       KEYCLOAK_URL: ${KEYCLOAK_PUBLIC_URL:-http://localhost:8080}
